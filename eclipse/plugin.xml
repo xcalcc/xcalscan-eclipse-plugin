@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="com.xcal.eclipse.handlers.RunAnalysis"
+            id="com.xcal.eclipse.commands.RunAnalysis"
+            name="RunAnalysis">
+      </command>
+      <command
+            defaultHandler="com.xcal.eclipse.handlers.ShowPath"
+            id="com.xcal.eclipse.commands.ShowTrace"
+            name="ShowTrace">
+      </command>
+      <command
+            defaultHandler="com.xcal.eclipse.handlers.ShowRuleDocumentation"
+            id="com.xcal.eclipse.commands.ShowRuleDocumentation"
+            name="ShowRuleDocumentation">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="com.xcal.eclipse.preferences.XCalSystemSettings"
+            id="xcaleclipse.systemSettings"
+            name="Xcalscan">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.ui.propertyPages">
+
+      <page
+            class="com.xcal.eclipse.preferences.XCalProjectSettings"
+            id="xcaleclipse.projectSettings"
+            name="Xcalscan">
+         <enabledWhen>
+            <adapt
+                  type="org.eclipse.core.resources.IProject">
+            </adapt>
+         </enabledWhen>
+         
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.ui.startup">
+      <startup
+            class="com.xcal.eclipse.Activator">
+      </startup>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="menu:org.eclipse.ui.main.menu">
+         <menu
+               label="Xcalscan">
+            <command
+                  commandId="com.xcal.eclipse.commands.RunAnalysis"
+                  icon="icons/Icon_Xcalscan_22px.png"
+                  label="Scan File"
+                  style="push">
+            </command>
+            <command
+                  commandId="com.xcal.eclipse.commands.ShowTrace"
+                  label="Show Trace Path"
+                  style="push">
+
+            </command>
+            <command
+                  commandId="com.xcal.eclipse.commands.ShowRuleDocumentation"
+                  label="Show Rule Description"
+                  style="push">
+
+            </command>
+         </menu>
+      </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.ui.views.ProblemView">
+         <command
+               commandId="com.xcal.eclipse.commands.ShowTrace"
+               icon="icons/Icon_Xcalscan_22px.png"
+               label="Show Trace Path"
+               style="push">
+         </command>
+         <command
+               commandId="com.xcal.eclipse.commands.ShowRuleDocumentation"
+               icon="icons/Icon_Xcalscan_22px.png"
+               label="Show Rule Description"
+               style="push">
+         </command>
+         <separator
+               name="com.xcal.eclipse.ui.menu.sparator">
+         </separator>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            class="com.xcal.eclipse.views.PathView"
+            icon="icons/Icon_Xcalscan_22px.png"
+            id="com.xcal.eclipse.ui.PathView"
+            name="Xcalscan Trace Path"
+            restorable="true">
+      </view>
+      <view
+            class="com.xcal.eclipse.views.RuleDocumentationView"
+            icon="icons/Icon_Xcalscan_22px.png"
+            id="com.xcal.eclipse.ui.RuleDocumentation"
+            name="Xcalscan Rule Description"
+            restorable="true">
+      </view>
+   </extension>
+
+</plugin>
